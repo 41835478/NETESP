@@ -102,7 +102,7 @@
             xhr.send(null);/*发送http body*/
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
-<<<<<<< HEAD
+
 //                    var result = this.responseText;/*存储json*/
 //                    var forumNumber  = result.length;/*论坛数量*/
 //                    var forumHTMLCode = "";/*不用管我*/
@@ -129,7 +129,7 @@
 //                            "        </li>";
 //                    }
 //                    document.getElementById("forumlist").innerHTML = forumHTMLCode;
-=======
+
                     var result = this.responseText;/*存储json*/
                     var forumNumber  = result.length;/*论坛数量*/
                     var forumHTMLCode = "";/*不用管我*/
@@ -156,7 +156,6 @@
                             "        </li>";
                     }
                     document.getElementById("forumlist").innerHTML = forumHTMLCode;
->>>>>>> bdf7ea1906463ea6f12ad3b98d4a7267ff514a73
                 }
 
             }

@@ -136,8 +136,111 @@
 
     </style>
 
+    <script type="text/javascript">
+
+        function onclickFunction() {
+            getTopPosts();
+            getPosts(1);
+        }
+
+        function createXmlHttpRequest(){
+            if(window.ActiveXObject){ //如果是IE浏览器
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            }else if(window.XMLHttpRequest){ //非IE浏览器
+                return new XMLHttpRequest();
+            }
+        }
+
+        function getTopPosts() {
+            /*置顶帖子数据填充*/
+            /*表头*/
+            var htmlCode = "<tr class=\"postTitle\">\n" +
+                "        <td class=\"firstColumnInTable\">置顶主题</td>\n" +
+                "        <td>作者</td>\n" +
+                "        <td>评论数</td>\n" +
+                "        <td>最后回复</td>\n" +
+                "    </tr>";
+
+            var url = "";
+            var xhr = createXmlHttpRequest();
+            xhr.open('post', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send(null);
+            /*发送http body*/
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = this.responseText;
+                    var result = eval('(' + jsonObject + ')');//json转为js数组
+                    for (var i = 0; i < 5; i++) {
+                        var postTitle = result[0];
+                        var postOwner = result[0];
+                        var replyNumber = result[0];
+                        var lastReply = result[0];
+                        var postURL = result[0];
+                        var postTime = result[0];
+                        var lastReplyTime = result[0];
+
+                        htmlCode += "<tr class=\"post\">\n" +
+                            "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
+                            "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
+                            "        <td>" + replyNumber + "</td>\n" +
+                            "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
+                            "    </tr>";
+                    }
+
+                    element.getElementById("topPosts").innerHTML = htmlCode;
+                }
+            }
+
+            function getPosts(page) {
+                /*输入page获取普通帖子*/
+                /*表头*/
+                var htmlCode = "<tr class=\"postTitle\">\n" +
+                    "        <td class=\"firstColumnInTable\">置顶主题</td>\n" +
+                    "        <td>作者</td>\n" +
+                    "        <td>评论数</td>\n" +
+                    "        <td>最后回复</td>\n" +
+                    "    </tr>";
+
+                var url = "";
+                var xhr = createXmlHttpRequest();
+                xhr.open('post', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("page=" + page);//发送页数
+                /*发送http body*/
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var jsonObject = this.responseText;
+                        var result = eval("(" + jsonObject + ")");//json转为js数组
+                        for (var i = 0; i < 5; i++) {
+                            var postTitle = result[0];
+                            var postOwner = result[0];
+                            var replyNumber = result[0];
+                            var lastReply = result[0];
+                            var postURL = result[0];
+                            var postTime = result[0];
+                            var lastReplyTime = result[0];
+
+                            htmlCode += "<tr class=\"post\">\n" +
+                                "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
+                                "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
+                                "        <td>" + replyNumber + "</td>\n" +
+                                "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
+                                "    </tr>";
+                        }
+
+                        element.getElementById("topPosts").innerHTML = htmlCode;
+                    }
+                }
+            }
+        }
+
+
+
+    </script>
+
 </head>
-<body>
+<body onclick="onclickFunction()">
 
 <div class="header">
     <a href="forumIndex.html" class="backButton">返回论坛列表</a>
@@ -146,42 +249,13 @@
     <input class="searchBar" type="text" placeholder="搜索内容">
 </div>
 
-<table class="topPosts">
-    <!--置顶帖子-->
-    <!--表头-->
-    <tr class="postTitle">
-        <td class="firstColumnInTable">置顶主题</td>
-        <td>作者</td>
-        <td>评论数</td>
-        <td>最后回复</td>
-    </tr>
-    <!--内容-->
-    <script type="text/javascript">
-        /*置顶帖子数据填充*/
-        for(var i = 0; i<5; i++){
-            var postTitle = "我校在第三届“互联网+”大赛广东省决赛中喜获2金1银" + ( i + 1 );
-            var postOwner = "华南农业大学";
-            var replyNumber = parseInt(Math.random() * 1000);
-            var lastReply = "小菊花妈妈";
-            var postURL = "./postsDetail.html";
-            var postTime = "2017-01-01";
-            var lastReplyTime = "2017-08-08 10:00:00";
-
-            document.write("<tr class=\"post\">\n" +
-                "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
-                "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
-                "        <td>" + replyNumber + "</td>\n" +
-                "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
-                "    </tr>");
-        }
-
-    </script>
+<table class="topPosts" id="topPosts">
 
 
 </table>
 
 
-<table class="posts">
+<table class="posts" id="posts">
     <!--普通帖子-->
     <!--表头-->
     <tr class="postTitle">
