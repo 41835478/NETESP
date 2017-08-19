@@ -12,21 +12,19 @@
 
     <style type="text/css">
 
-        *{
+        * {
             margin: 0px;
             padding: 0px;
         }
 
-        .header{
+        .header {
             width: 100%;
             height: 43px;
             background-color: rebeccapurple;
             border-bottom: 1px gray solid;
         }
 
-
-
-        .bottom{
+        .bottom {
             width: 100%;
             height: 43px;
             background-color: rebeccapurple;
@@ -35,73 +33,73 @@
             color: #fff;
         }
 
-        .bottom>a{
+        .bottom > a {
             float: left;
             margin: 10px;
             color: #fff;
         }
-        
-        .backButton{
+
+        .backButton {
             margin: 10px;
             float: left;
             color: #fff;
         }
 
-        .postLink{
+        .postLink {
             margin: 10px;
             float: left;
             color: #fff;
         }
 
-        button{
+        button {
             height: 26px;
             float: right;
             margin: 7px 5px;
         }
 
-        .searchBar{
+        .searchBar {
             float: right;
             height: 22px;
             margin-top: 7px;
         }
 
-        li{
+        li {
             list-style: none;
         }
 
-        table{
+        table {
             width: 100%;
             text-align: left;
             border-collapse: collapse;
             margin-top: 10px;
         }
 
-        tr{
+        tr {
             height: 40px;
             border-top: 1px gray solid;
             border-bottom: 1px gray solid;
             border-collapse: collapse;
         }
 
-        .postTitle{
+        .postTitle {
             background-color: lightgray;
         }
 
-        .post:nth-child(even){
+        .post:nth-child(even) {
             background-color: #f9f7f7;
         }
 
-        a{
+        a {
             margin-left: 5px;
             text-decoration: none;
             color: black;
         }
 
-        a:hover{
+        a:hover {
             text-decoration: underline;
         }
 
-        .pageButton{
+        .pageButton {
             display: inline-block;
             border: 1px dimgray solid;
             float: right;
@@ -110,25 +108,25 @@
             height: 23px;
         }
 
-        .pageButton>a,.header>a{
+        .pageButton > a, .header > a {
             display: inline-block;
         }
 
-        .inputPage{
+        .inputPage {
             width: 20px;
         }
 
-        .firstColumnInTable{
+        .firstColumnInTable {
             width: 50%;
         }
 
-        .pageButton>a{
+        .pageButton > a {
             margin: 0px;
             display: inline-block;
             color: #fff;
         }
 
-        .postButton{
+        .postButton {
             width: 80px;
             height: 33px;
             margin: 5px;
@@ -138,24 +136,107 @@
 
     <script type="text/javascript">
 
-        function onclickFunction() {
+        function onloadFunction() {
             getTopPosts();
             getPosts(1);
         }
 
-        function createXmlHttpRequest(){
-            if(window.ActiveXObject){ //如果是IE浏览器
+        function createXmlHttpRequest() {
+            if (window.ActiveXObject) { //如果是IE浏览器
                 return new ActiveXObject("Microsoft.XMLHTTP");
-            }else if(window.XMLHttpRequest){ //非IE浏览器
+            } else if (window.XMLHttpRequest) { //非IE浏览器
                 return new XMLHttpRequest();
             }
         }
 
-        function getTopPosts() {
-            /*置顶帖子数据填充*/
+        function getTopPosts() {/*载入置顶主题*/
             /*表头*/
             var htmlCode = "<tr class=\"postTitle\">\n" +
                 "        <td class=\"firstColumnInTable\">置顶主题</td>\n" +
+                "        <td>作者</td>\n" +
+                "        <td>评论数</td>\n" +
+                "        <td>最后回复</td>\n" +
+                "    </tr>";
+
+            var url = "";//***获取置顶主题的接口***
+            var xhr = createXmlHttpRequest();
+            xhr.open('post', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send(null);
+            /*发送http body*/
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = this.responseText;
+                    var result = eval('(' + jsonObject + ')');//json转为js数组
+                    for (var i = 0; i < 5; i++) {
+                        var topicName = result[i].topicName;
+                        var creator = result[i].creator;
+                        var postNum = result[i].postNum;
+                        var lastPoster = result[i].lastPoster;//最后回复人***
+                        var postURL = "#";//帖子链接***
+                        var createTime = result[i].createTime;
+                        var lastPostTime = result[i].lastPostTime;//最后回复帖子时间***
+
+                        htmlCode += "<tr class=\"post\">\n" +
+                            "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + topicName + "</a></td>\n" +
+                            "        <td>" + creator + "<br />" + createTime + "</td>\n" +
+                            "        <td>" + postNum + "</td>\n" +
+                            "        <td>" + lastPoster + "<br />" + lastPostTime + "</td>\n" +
+                            "    </tr>";
+                    }
+
+                    element.getElementById("topPosts").innerHTML = htmlCode;
+                }
+            }
+        }
+
+        function getPosts(page) {/*载入该page的普通主题*/
+            displayPage(page);//显示最底部页面切换
+            /*表头*/
+            var htmlCode = "<tr class=\"postTitle\">\n" +
+                "        <td class=\"firstColumnInTable\">普通主题</td>\n" +
+                "        <td>作者</td>\n" +
+                "        <td>评论数</td>\n" +
+                "        <td>最后回复</td>\n" +
+                "    </tr>";
+
+            var url = "";//***获取普通主题的接口***
+            var xhr = createXmlHttpRequest();
+            xhr.open('post', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send("");//***发送需要获取的页数***
+            /*发送http body*/
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = this.responseText;
+                    var result = eval('(' + jsonObject + ')');//json转为js数组
+                    for (var i = 0; i < 5; i++) {
+                        var topicName = result[i].topicName;
+                        var creator = result[i].creator;
+                        var postNum = result[i].postNum;
+                        var lastPoster = result[i].lastPoster;//最后回复人***
+                        var postURL = "#";//帖子链接***
+                        var createTime = result[i].createTime;
+                        var lastPostTime = result[i].lastPostTime;//最后回复帖子时间***
+
+                        htmlCode += "<tr class=\"post\">\n" +
+                            "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + topicName + "</a></td>\n" +
+                            "        <td>" + creator + "<br />" + createTime + "</td>\n" +
+                            "        <td>" + postNum + "</td>\n" +
+                            "        <td>" + lastPoster + "<br />" + lastPostTime + "</td>\n" +
+                            "    </tr>";
+                    }
+
+                    element.getElementById("topPosts").innerHTML = htmlCode;
+                }
+            }
+
+        }
+
+        function displayPage(page) {
+        //显示底部页数跳转
+            var htmlCode = "<tr class=\"postTitle\">\n" +
+                "        <td class=\"firstColumnInTable\">普通主题</td>\n" +
                 "        <td>作者</td>\n" +
                 "        <td>评论数</td>\n" +
                 "        <td>最后回复</td>\n" +
@@ -170,77 +251,34 @@
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     var jsonObject = this.responseText;
-                    var result = eval('(' + jsonObject + ')');//json转为js数组
-                    for (var i = 0; i < 5; i++) {
-                        var postTitle = result[0];
-                        var postOwner = result[0];
-                        var replyNumber = result[0];
-                        var lastReply = result[0];
-                        var postURL = result[0];
-                        var postTime = result[0];
-                        var lastReplyTime = result[0];
+                    var result = eval('(' + jsonObject + ')');
+                    /*帖子页数填充*/
+                    var totalPostNumber = result.number;/*该论坛包含的总主题数*/
+                    var postsPerPage = 20;/*每页包含的主题数*/
+                    var lastPage = Math.ceil(totalPostNumber / postsPerPage);
+                    document.getElementById("bottom").innerHTML = "<span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + page + "+1)'>下一页</a></span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + lastPage + ")'>..." + lastPage + "</a></span>\n" +
+                        "    <span class=\"pageButton\"><input onchange='jumpToPage()' id='page' class=\"inputPage\" value=\" " + page + " \" type=\"text\">/页</span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(1)'>1</a></span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + page + "-1==0?1:" + page + "-1)'>上一页</a></span>";
 
-                        htmlCode += "<tr class=\"post\">\n" +
-                            "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
-                            "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
-                            "        <td>" + replyNumber + "</td>\n" +
-                            "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
-                            "    </tr>";
-                    }
-
-                    element.getElementById("topPosts").innerHTML = htmlCode;
+                    document.getElementById("page").value = page;
                 }
             }
 
-            function getPosts(page) {
-                /*输入page获取普通帖子*/
-                /*表头*/
-                var htmlCode = "<tr class=\"postTitle\">\n" +
-                    "        <td class=\"firstColumnInTable\">置顶主题</td>\n" +
-                    "        <td>作者</td>\n" +
-                    "        <td>评论数</td>\n" +
-                    "        <td>最后回复</td>\n" +
-                    "    </tr>";
 
-                var url = "";
-                var xhr = createXmlHttpRequest();
-                xhr.open('post', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send("page=" + page);//发送页数
-                /*发送http body*/
-                xhr.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var jsonObject = this.responseText;
-                        var result = eval("(" + jsonObject + ")");//json转为js数组
-                        for (var i = 0; i < 5; i++) {
-                            var postTitle = result[0];
-                            var postOwner = result[0];
-                            var replyNumber = result[0];
-                            var lastReply = result[0];
-                            var postURL = result[0];
-                            var postTime = result[0];
-                            var lastReplyTime = result[0];
 
-                            htmlCode += "<tr class=\"post\">\n" +
-                                "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/top_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
-                                "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
-                                "        <td>" + replyNumber + "</td>\n" +
-                                "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
-                                "    </tr>";
-                        }
-
-                        element.getElementById("topPosts").innerHTML = htmlCode;
-                    }
-                }
-            }
         }
 
+        function jumpToPage() {
+            getPosts(document.getElementById("page").value);
+        }
 
 
     </script>
 
 </head>
-<body onclick="onclickFunction()">
+<body onload="onloadFunction()">
 
 <div class="header">
     <a href="forumIndex.html" class="backButton">返回论坛列表</a>
@@ -249,63 +287,17 @@
     <input class="searchBar" type="text" placeholder="搜索内容">
 </div>
 
-<table class="topPosts" id="topPosts">
+<table class="topPosts" id="topPosts"><!--置顶帖子-->
 
 
 </table>
 
 
-<table class="posts" id="posts">
-    <!--普通帖子-->
-    <!--表头-->
-    <tr class="postTitle">
-        <td class="firstColumnInTable">主题</td>
-        <td>作者</td>
-        <td>评论数</td>
-        <td>最后回复</td>
-    </tr>
-    <!--内容-->
-    <script type="text/javascript">
-        /*普通帖子数据填充*/
-        for(var i = 0; i<20; i++) {
-
-            var postTitle = "小葵花妈妈课堂开课啦" + ( i + 1 );
-            var postOwner = "小葵花";
-            var replyNumber = parseInt(Math.random() * 1000);
-            var lastReply = "小菊花妈妈";
-            var postURL = "./postsDetail.html";
-            var postTime = "2017-01-01";
-            var lastReplyTime = "2017-08-08 10:00:00";
-
-            document.write("<tr class=\"post\">\n" +
-                "        <td><a href=\"" + postURL + "\"><img src=\"./IMG/normal_posts.gif\" alt=\"top_post\">" + postTitle + "</a></td>\n" +
-                "        <td>" + postOwner + "<br />" + postTime + "</td>\n" +
-                "        <td>" + replyNumber + "</td>\n" +
-                "        <td>" + lastReply + "<br />" + lastReplyTime + "</td>\n" +
-                "    </tr>");
-        }
-
-    </script>
-
+<table class="posts" id="posts"><!--普通帖子-->
 </table>
 
-<div class="bottom">
 
-    <a href="#">发布帖子</a>
-
-    <script type="text/javascript">
-        /*帖子页数填充*/
-        var totalPostNumber = 1001;/*该论坛包含的总帖子数*/
-        var postsPerPage = 20;/*每页包含的帖子数*/
-        var currentPage = 1;/*当前页*/
-
-        document.write("<span class=\"pageButton\"><a href=\"#\">下一页</a></span>\n" +
-            "    <span class=\"pageButton\"><a href=\"#\">..." + Math.ceil(totalPostNumber/postsPerPage) + "</a></span>\n" +
-            "    <span class=\"pageButton\"><input class=\"inputPage\" value=\" " + currentPage + " \" type=\"text\">/页</span>\n" +
-            "    <span class=\"pageButton\"><a href=\"#\">1</a></span>\n" +
-            "    <span class=\"pageButton\"><a href=\"#\">上一页</a></span>");
-
-    </script>
+<div id="bottom" class="bottom">
 </div>
 
 </body>
