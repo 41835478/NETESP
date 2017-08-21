@@ -21,7 +21,12 @@
             width: 100%;
             height: 43px;
             background-color: rebeccapurple;
-            border-bottom: 1px gray solid;
+            color: white;
+        }
+
+        .header > span{
+            margin: 10px;
+            font-size: 30px;
         }
 
         .bottom {
@@ -136,9 +141,12 @@
 
     <script type="text/javascript">
 
+        var boardName;
+
         function onloadFunction() {
             getTopPosts();
             getPosts(1);
+            boardName = document.getElementById("getboardname").value;/*获取论坛名*/
         }
 
         function createXmlHttpRequest() {
@@ -162,7 +170,7 @@
             var xhr = createXmlHttpRequest();
             xhr.open('post', url, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send(null);
+            xhr.send("boardName="+boardName);
             /*发送http body*/
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -204,7 +212,7 @@
             var xhr = createXmlHttpRequest();
             xhr.open('post', url, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send("");//***发送需要获取的页数***
+            xhr.send("boardName=" + boardName + "&pageNum=" + page);//***发送需要获取的页数***
             /*发送http body*/
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -280,6 +288,10 @@
 </head>
 <body onload="onloadFunction()">
 
+<input id="getboardname" type="hidden" name="pwd" value="${boardName}"><!--放置隐藏的input标签以便js获取该属性-->
+
+<div class="header"><span>${boardName}</span></div>
+
 <div class="header">
     <a href="forumIndex.html" class="backButton">返回论坛列表</a>
     <a href="./postPost.html" class="postLink">发布帖子</a>
@@ -288,8 +300,6 @@
 </div>
 
 <table class="topPosts" id="topPosts"><!--置顶帖子-->
-
-
 </table>
 
 

@@ -188,6 +188,10 @@
             document.getElementById("replypostblock" + postNumber).innerHTML = "";/*replypostblock里面的东西消失*/
         }
 
+        function getThemeContent() {/**/
+            
+        }
+
     </script>
 </head>
 <body>
@@ -199,27 +203,21 @@
 
 </div>
 
-<script type="text/javascript">
+<ul class="nav">
 
-    var replyLink = "#editor";
-    var setTopLink = "#";
-    var cancelTopLink = "#";
-    var deleteLink = "#";
-    var goBackLink = "javascript:history.go(-1);";
+    <li><a href="#" class="navtablink">发表回复</a></li>
+    <li><a href="#" class="navtablink">设置置顶</a></li>
+    <li><a href="#" class="navtablink">取消置顶</a></li>
+    <li><a href="#" class="navtablink">删除该贴</a></li>
+    <li><a href="#" class="navtablink">返回版块</a></li>
 
-    document.write(
-        "<ul class=\"nav\">\n" +
-        "    <li><a href=\"" + replyLink + "\" class=\"navtablink\">发表回复</a></li>\n" +
-        "    <li><a href=\"" + setTopLink + " \" class=\"navtablink\">设置置顶</a></li>\n" +
-        "    <li><a href=\"" + cancelTopLink + " \" class=\"navtablink\">取消置顶</a></li>\n" +
-        "    <li><a href=\"" + deleteLink + " \" class=\"navtablink\">删除该贴</a></li>\n" +
-        "    <li><a href=\"" + goBackLink + " \" class=\"navtablink\">返回版块</a></li>\n" +
-        "</ul>"
-    )
-
-</script>
+</ul>
 
 <!--帖子内容-->
+<div class="themeContent">
+</div>
+<div class="replyContent">
+</div>
 
 <script type="text/javascript">
     var userIconAddress = "./IMG/user_icon.png";
