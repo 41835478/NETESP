@@ -1,7 +1,6 @@
 <!--
-    这一页是查看帖子页面，
-    显示帖子内容和帖子回复，
-
+    这一页是查看主题页面，
+    显示主题内容、主题帖子和帖子回复
 -->
 
 <!DOCTYPE html>
@@ -14,6 +13,10 @@
         *{
             margin: 0px;
             padding: 0px;
+        }
+
+        .preload{
+            display: none;
         }
 
         .header{
@@ -45,7 +48,6 @@
 
         li{
             float: left;
-            display: inline-block;
             width: 20%;
             text-align: center;
             margin: 0px;
@@ -157,44 +159,262 @@
             width: 80px;
             margin-top: 10px;
         }
+        .waitimg{
+            width: 50px;
+            position: relative;
+            left: 50%;
+        }
 
 
     </style>
 
     <script type="text/javascript">
 
-        /*回复的消息用此方法处理*/
-        function postReply() {
-            alert(ue.getContent());
+        /*回复主题用此方法处理*/
+        function themeReply() {
+            var url = "";//*******************************
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open("POST", url, true);
+            xhr.send("themeNum=" + document.getElementById("getThemeNum").value + "&content=" + ue.getContent());
+            xhr.onreadystatechange(function () {
+                if(this.status == 200 && this.readyState == 4){
+                    alert("发送成功！");
+                }
+            });
         }
 
-        function deletePost(newPostNumber){
+        /*回复帖子用此方法处理*/
+        function postReply(postNum) {
+            var url = "";//*******************************
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open("POST", url, true);
+            xhr.send("postNum=" + postNum + "&content=" + document.getElementById("replyinput"+postNum).value);
+            xhr.onreadystatechange(function () {
+                if(this.status == 200 && this.readyState == 4){
+                    alert("发送成功！");
+                }
+            });
+        }
+
+        /*删除主题*/
+        function deleteTheme(){
+            if(confirm("删除是不可恢复的，你确认要删除吗？")) {
+                var url = "";//*******************************
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.open("POST", url, true);
+                xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
+                xhr.onreadystatechange(function () {
+                    if (this.status == 200 && this.readyState == 4) {
+                        alert("删除成功！");
+                    }
+                });
+            }
+        }
+
+        /*删除帖子*/
+        function deletePost(postNum) {
+            if(confirm("删除是不可恢复的，你确认要删除吗？")) {
+                var url = "";//*******************************
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.open("POST", url, true);
+                xhr.send("postNum=" + postNum);
+                xhr.onreadystatechange(function () {
+                    if (this.status == 200 && this.readyState == 4) {
+                        alert("删除成功！");
+                    }
+                });
+            }
+        }
+
+        /*设置置顶*/
+        function setTop(){
+            if(confirm("是否置顶该帖？")) {
+                var url = "";//*******************************
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.open("POST", url, true);
+                xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
+                xhr.onreadystatechange(function () {
+                    if (this.status == 200 && this.readyState == 4) {
+                        alert("该帖已置顶！");
+                    }
+                });
+            }
+        }
+
+        /*取消置顶*/
+        function cancelTop(){
+            if(confirm("是否取消置顶？")) {
+                var url = "";//*******************************
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.open("POST", url, true);
+                xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
+                xhr.onreadystatechange(function () {
+                    if (this.status == 200 && this.readyState == 4) {
+                        alert("取消置顶成功！");
+                    }
+                });
+            }
+        }
+
+        /*获取主题的方法*/
+        function getThemeContent() {
+            var url = "";//*******************************
+            var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open("POST", url, true);
+            xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
+            xhr.onreadystatechange(function () {
+                if(this.status == 200 && this.readyState == 4){
+                    var json = this.responseText;
+                    var result = eval("(" + json + ")");
+
+                    var userIconAddress = "./IMG/user_icon.png";
+                    var userName = result.userName;
+                    var themeTitle = result.themeTitle;
+                    var themeContent = result.themeContent;
+                    var postTime = new date(result.postTime).toLocaleString();
+
+                    document.getElementById("themeContent").innerHTML =
+                        "<table class=\"content\">\n" +
+                        "    <tr>\n" +
+                        "        <tr>\n" +
+                        "            <td class=\"userInfo\" rowspan=\"3\">\n" +
+                        "                <div>\n" +
+                        "                    <img class=\"userIcon\" src=\"" + userIconAddress + "\" alt=\"userIcon\"><br />\n" +
+                        "                    <span>" + userName + "</span>\n" +
+                        "                </div>\n" +
+                        "\n" +
+                        "            </td>\n" +
+                        "            <td class=\"postTheme\">主题：" + themeTitle + "</td>\n" +
+                        "        </tr>\n" +
+                        "        <tr>\n" +
+                        "            <td class=\"postContent\">\n" +
+                        "" + themeContent + "\n" +
+                        "            </td>\n" +
+                        "        </tr>\n" +
+                        "        <tr>\n" +
+                        "            <td class=\"postTime\">发表时间：" + postTime + "</td>\n" +
+                        "        </tr>\n" +
+                        "    </tr>\n" +
+                        "</table>"
+                }
+            });
+
 
         }
 
-        function showReply(postNumber) {
-            document.getElementById("replypostblock" + postNumber).style.display = "";
-            var postReply = "<input class='replyinput' id='replyinput" + postNumber + "'><br><button class='replybutton' id='replybutton" + postNumber + "' onclick='postReplyFunction(" + postNumber + ")'>发表</button><br>";
-            var replyContent = "<div class='replycontent' id='replycontent" + postNumber + "'>华南农业大学:感谢支持!!!!!!!!!!!!!!<br><div/>";
-            var replyBackButton = "<a class='replybackbutton' id='replybackbutton" + postNumber + "' href='javascript:void' onclick='replyBackFunction(" + postNumber + ")'>收回↑</a>";
-            document.getElementById("replypostblock" + postNumber).innerHTML = postReply + replyContent + replyBackButton;
+        /*获取该主题第page页帖子*/
+        function getPosts(page) {
+            showPageControl(page);
+            url = "";//*******************************
+            var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open("POST", url, true);
+            xhr.send("page=" + page + "&themeNum=" + document.getElementById("getThemeNum").value);//发送页数page、主题号themeNum
+            xhr.onreadystatechange(function () {
+                if(this.status == 200&&this.readyState == 4){
+                    var jsonObject = this.responseText;
+                    var result = eval("(" + jsonObject + ")");
+                    var htmlCode = "";/*不用管我我不是来搞笑的*/
+                    for(var i=0;i<result.length;i++) {
+                        var userName = result[i].userName;/*发帖人用户名*/
+                        var postID = result[i].postNum;/*帖子编号*/
+                        var replyNumber = result[i].replyNumber;/*回复数量*/
+                        var userIconAddress = "./IMG/user_icon.png";/*头像地址*/
+                        var postContent = result[i].postContent;/*帖子内容*/
+                        var postTime = result[i].postTime;/*发布时间*/
+                        htmlCode +=
+                            "<table id =' " + postID + " ' class=\"content\">\n" +
+                            "    <tr>\n" +
+                            "        <tr>\n" +
+                            "            <td class=\"userInfo\" rowspan=\"3\">\n" +
+                            "                <div>\n" +
+                            "                    <img class=\"userIcon\" src=\"" + userIconAddress + "\" alt=\"userIcon\"><br />\n" +
+                            "                    <span>" + userName + "</span>\n" +
+                            "                </div>\n" +
+                            "\n" +
+                            "            </td>\n" +
+                            "            <td class=\"postTime\">发表时间：" + postTime + "</td>\n" +
+                            "        </tr>\n" +
+                            "        <tr>\n" +
+                            "            <td class=\"postContent\">\n" +
+                            "                " + postContent + "\n" +
+                            "            </td>\n" +
+                            "        </tr>\n" +
+                            "        <tr>\n" +
+                            "            <td class=\"postMenu\"><a href='javascript:void(0)' onclick='deletePost(" + postID + ")'>删除</a> <a href='javascript:void(0)' onclick='showReply(" + postID + ")'>回复(" + replyNumber + ")</a>&nbsp;</td>\n" +
+                            "        </tr>\n" +
+                            "    </tr>\n" +
+                            "   <tr><td class='replypostblock' id='replypostblock" + postID + "' colspan='2'></td></tr>" +
+                            "</table>\n";
+                    }
+                    document.getElementById("postContent").innerHTML = htmlCode;
+                }
+            })
+
         }
 
-        function replyBackFunction(postNumber) {
-            /*document.getElementById("replyinput" + postNumber).style.display = "none";
-            document.getElementById("replybutton" + postNumber).style.display = "none";
-            document.getElementById("replycontent" + postNumber).style.display = "none";
-            document.getElementById("replybackbutton" + postNumber).style.display = "none";*/
-            document.getElementById("replypostblock" + postNumber).innerHTML = "";/*replypostblock里面的东西消失*/
+        /*传入帖子id，获取并展开当前帖子下的评论*/
+        function showReply(postNum) {
+            var url = "";//*******************************
+            var img = "<img class='waitimg' src=\"./IMG/wait.gif\" alt=\"\">";
+            var replyBackButton = "<a class='replybackbutton' id='replybackbutton" + postNum + "' href='javascript:void(0)' onclick='replyBackFunction(" + postNum + ")'>收回↑</a>";
+            document.getElementById("replypostblock" + postNum).innerHTML = img+replyBackButton;
+
+            var xhr = window.XMLHttpRequest?new XMLHttpRequest():new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.send("postNum=" + postNum);
+            xhr.onreadystatechange(function () {
+                if(this.status = 200 && this.readyState == 4){
+                    var jsonObject = this.responseText;
+                    var result = eval("(" + jsonObject + ")");
+                    var postReply = "<input class='replyinput' id='replyinput" + postNum + "'><br><button class='replybutton' id='replybutton" + postNum + "' onclick='postReply(" + postNum + ")'>发表</button><br>";
+                    var replyContent = "";/*不用管我*/
+                    for(var i = 0; i < result.length; i++){
+                        replyContent += result.reply[i] + "<br>";
+                    }
+                    document.getElementById("replypostblock" + postNum).innerHTML = postReply + replyContent + replyBackButton;
+                }
+            });
+                   }
+        function replyBackFunction(postNum) {//令回复内容收起
+            document.getElementById("replypostblock" + postNum).innerHTML = "";/*replypostblock里面的东西消失*/
         }
 
-        function getThemeContent() {/**/
-            
+        //输入当前页page显示当前页page显示控制模块
+        function showPageControl(page){
+            var url = "";//*******************************
+            var xhr = window.createXmlHttpRequest()?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open('post', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send("themeNum" + document.getElementById("getThemeNum").value);
+            /*发送http body*/
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = this.responseText;
+                    var result = eval('(' + jsonObject + ')');
+                    /*帖子页数填充*/
+                    var totalPostNumber = result.number;/*该主题包含的总帖子数*/
+                    var postsPerPage = 20;/*每页包含的帖子数*/
+                    var lastPage = Math.ceil(totalPostNumber / postsPerPage);
+                    document.getElementById("bottom").innerHTML = "<span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + page + "+1)'>下一页</a></span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + lastPage + ")'>..." + lastPage + "</a></span>\n" +
+                        "    <span class=\"pageButton\"><input onchange='jumpToPage()' id='page' class=\"inputPage\" value=\" " + page + " \" type=\"text\">/页</span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(1)'>1</a></span>\n" +
+                        "    <span class=\"pageButton\"><a href=\"javascript:void(0)\" onclick='getPosts(" + page + "-1==0?1:" + page + "-1)'>上一页</a></span>";
+
+                    document.getElementById("page").value = page;
+                }
+            }
+        }
+        function jumpToPage(){
+            getPosts(document.getElementById("page").value);
         }
 
     </script>
 </head>
-<body>
+<body onload="getThemeContent();getPosts();showPageControl()">
+<input id="getThemeNum" type="hidden" value="${themeNum}"><!-- 获取服务器发送的attribute-->
+<img class="preload" src="./IMG/wait.gif" alt=""><!--预加载等待图片-->
+
 <div class="header">
     <script>
         var forumName = "应急学习版块";
@@ -205,107 +425,18 @@
 
 <ul class="nav">
 
-    <li><a href="#" class="navtablink">发表回复</a></li>
-    <li><a href="#" class="navtablink">设置置顶</a></li>
-    <li><a href="#" class="navtablink">取消置顶</a></li>
-    <li><a href="#" class="navtablink">删除该贴</a></li>
-    <li><a href="#" class="navtablink">返回版块</a></li>
+    <li><a href="#editor" class="navtablink">发表回复</a></li>
+    <li><a href="javascript:void(0)" class="navtablink" onclick="setTop()">设置置顶</a></li>
+    <li><a href="javascript:void(0)" class="navtablink" onclick="cancelTop()">取消置顶</a></li>
+    <li><a href="javascript:void(0)" class="navtablink" onclick="deleteTheme()">删除主题</a></li>
+    <li><a href="javascript:history.go(-1)" class="navtablink">返回版块</a></li>
 
 </ul>
 
 <!--帖子内容-->
-<div class="themeContent">
-</div>
-<div class="replyContent">
-</div>
-
-<script type="text/javascript">
-    var userIconAddress = "./IMG/user_icon.png";
-    var userName = "华南农业大学";
-    var postTheme = "我校在第三届“互联网+”大赛广东省决赛中喜获2金1银";
-    var postContent = "8月4日，第三届中国“互联网+”大学生创新创业大赛“建行杯”广东省分赛决赛在广东工业大学举行，从全省135所高校1.4万个参赛项目中脱颖而出的80个创业项目同台竞技，争夺12个金奖和24个银奖。我校有3个创业项目入围决赛，经过激烈的角逐，最终斩获2金1银的好成绩。第三届中国“互联网+”大学生创新创业大赛是教育部举办的规格最高、影响最大的全国赛事，本届大赛主题是“搏击‘互联网+’新时代，壮大创新创业生力军”。大赛旨在深化高等教育综合改革，激发大学生的创造力，培养造就“大众创业、万众创新”的生力军；推动赛事成果转化和产学研用紧密结合，促进“互联网+”新业态形成，服务经济提质增效升级；以创新引领创业、以创业带动就业，推动高校毕业生更高质量创业就业。第三届中国“互联网+”大学生创新创业大赛是教育部举办的规格最高、影响最大的全国赛事，本届大赛主题是“搏击‘互联网+’新时代，壮大创新创业生力军”。大赛旨在深化高等教育综合改革，激发大学生的创造力，培养造就“大众创业、万众创新”的生力军；推动赛事成果转化和产学研用紧密结合，促进“互联网+”新业态形成，服务经济提质增效升级；以创新引领创业、以创业带动就业，推动高校毕业生更高质量创业就业。";
-    var postTime = "2017-08-06";
-
-    document.write(
-        "<table class=\"content\">\n" +
-        "    <tr>\n" +
-        "        <tr>\n" +
-        "            <td class=\"userInfo\" rowspan=\"3\">\n" +
-        "                <div>\n" +
-        "                    <img class=\"userIcon\" src=\"" + userIconAddress + "\" alt=\"userIcon\"><br />\n" +
-        "                    <span>" + userName + "</span>\n" +
-        "                </div>\n" +
-        "\n" +
-        "            </td>\n" +
-        "            <td class=\"postTheme\">主题：" + postTheme + "</td>\n" +
-        "        </tr>\n" +
-        "        <tr>\n" +
-        "            <td class=\"postContent\">\n" +
-        "" + postContent + "\n" +
-        "            </td>\n" +
-        "        </tr>\n" +
-        "        <tr>\n" +
-        "            <td class=\"postTime\">发表时间：" + postTime + "</td>\n" +
-        "        </tr>\n" +
-        "    </tr>\n" +
-        "</table>"
-    );
-
-</script>
-
-<script>
-    var postNumber = 5;/*跟帖数量*/
-    var userIconAddress = "./IMG/user_icon.png";
-    var postContent = "强烈支持！！！";
-    var postTime = "2017-08-06";
-
-    for(var i=0;i<postNumber;i++){
-        var userName = "机器人" + (i+1) + "号";
-        var postID = i;/*帖子编号*/
-        var replyNumber = 1;/*帖子数量*/
-
-        document.write(
-            "<table id =' " + postID + " ' class=\"content\">\n" +
-            "    <tr>\n" +
-            "        <tr>\n" +
-            "            <td class=\"userInfo\" rowspan=\"3\">\n" +
-            "                <div>\n" +
-            "                    <img class=\"userIcon\" src=\"" + userIconAddress + "\" alt=\"userIcon\"><br />\n" +
-            "                    <span>" + userName + "</span>\n" +
-            "                </div>\n" +
-            "\n" +
-            "            </td>\n" +
-            "            <td class=\"postTime\">发表时间：" + postTime + "</td>\n" +
-            "        </tr>\n" +
-            "        <tr>\n" +
-            "            <td class=\"postContent\">\n" +
-            "                " + postContent + "\n" +
-            "            </td>\n" +
-            "        </tr>\n" +
-            "        <tr>\n" +
-            "            <td class=\"postMenu\"><a href='javascript:void(0)' onclick='deletePost(" + postID + ")'>删除</a> <a href='javascript:void(0)' onclick='showReply(" + postID + ")'>回复(" + replyNumber + ")</a>&nbsp;</td>\n" +
-            "        </tr>\n" +
-            "    </tr>\n" +
-            "   <tr><td class='replypostblock' id='replypostblock" + postID + "' colspan='2'></td></tr>" +
-            "</table>\n"
-        );
-    }
-</script>
-
-<script type="text/javascript">
-    /*回复页数填充*/
-    var totalPostNumber = 1001;/*该帖子包含的总回复数*/
-    var postsPerPage = 20;/*每页包含的回复数*/
-    var currentPage = 1;/*当前页*/
-
-    document.write("<span class=\"pageButton\"><a href=\"#\">下一页</a></span>\n" +
-        "    <span class=\"pageButton\"><a href=\"#\">..." + Math.ceil(totalPostNumber/postsPerPage) + "</a></span>\n" +
-        "    <span class=\"pageButton\"><input class=\"inputPage\" value=\" " + currentPage + " \" type=\"text\">/页</span>\n" +
-        "    <span class=\"pageButton\"><a href=\"#\">1</a></span>\n" +
-        "    <span class=\"pageButton\"><a href=\"#\">上一页</a></span><br /><br />");
-
-</script>
-
+<div id="themeContent"></div>
+<div id="postContent"></div>
+<div id="pageControl"></div>
 <strong>&nbsp;发表回复</strong>
 
 <div id="editor">
@@ -321,10 +452,9 @@
             autoWidthEnabled: true
         });
     </script>
-    <button class="postReplyButton" onclick="postReply()"><!--此处发表回复调用postReply()方法-->
+    <button class="postReplyButton" onclick="themeReply()"><!--此处发表回复调用postReply()方法-->
         <strong>发表回复</strong>
     </button>
 </div>
-
 </body>
 </html>

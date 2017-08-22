@@ -1,5 +1,5 @@
 <!--
-    这一页是发送帖子的的页面
+    这一页是发送主题的的页面
 -->
 
 
@@ -22,6 +22,7 @@
             width: 100%;
             height: 42px;
         }
+
         .backButton{
             color: white;
             text-decoration: none;
@@ -34,6 +35,14 @@
         .header>span{
             display: inline-block;
             margin: 10px;
+        }
+
+        #themeTitle{
+            margin-bottom: 5px;
+            width: 100%;
+            height: 30px;
+            display: block;
+            font-size: 20px;
         }
 
         strong{
@@ -59,7 +68,19 @@
     <script type="text/javascript">
 
         function postReply() {
-            alert(ue.getContent());
+            ue.getContent();
+
+            url="";
+            var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.open("POST", url, true);
+            xhr.send("themeTitle=" + document.getElementById("themeTitle").value + "&themeContent=" + ue.getContent() + "boardName" + document.getElementById("getBoardName"));
+            //发送标题、内容、版块名
+            xhr.onreadystatechange(function () {
+                if(xhr.status == 200 && xhr.readyState == 4){
+                    alert("发送成功");
+                    history.go(-1);
+                }
+            })
         }
 
     </script>
@@ -67,19 +88,15 @@
 
 </head>
 <body>
+<input id="getBoardName" type="hidden" value="${boardName}">
 
 <div class="header">
-    <script>
-        var forumName = "应急学习版块";
-        document.write("<span>当前版块：<a class=\"backButton\" href=\"javascript:history.go(-1);\">" + forumName +"</a></span>");
-    </script>
+    <span>当前版块：<a class="backButton" href=\"javascript:history.go(-1);\">${boardName}</a></span>
 </div>
 
-
-
-
 <div id="editor">
-    <strong class="editorTitle">发表回复</strong>
+    <strong class="editorTitle">发表主题</strong><br>
+    <input id="themeTitle" type="text" placeholder="标题">
 
     <script id="container" name="content" type="text/plain"></script>
     <!-- 配置文件 -->
@@ -99,7 +116,7 @@
 
     </script>
     <button class="postReplyButton" onclick="postReply()"><!--此处发表回复调用postReply()方法-->
-        <strong>发表回复</strong>
+        <strong>发表主题</strong>
     </button>
 </div>
 
