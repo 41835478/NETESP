@@ -174,26 +174,28 @@
         function themeReply() {
             var url = "";//*******************************
             var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.open("POST", url, true);
             xhr.send("themeNum=" + document.getElementById("getThemeNum").value + "&content=" + ue.getContent());
-            xhr.onreadystatechange(function () {
+            xhr.onreadystatechange = function () {
                 if(this.status == 200 && this.readyState == 4){
                     alert("发送成功！");
                 }
-            });
+            };
         }
 
         /*回复帖子用此方法处理*/
         function postReply(postNum) {
             var url = "";//*******************************
             var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.open("POST", url, true);
             xhr.send("postNum=" + postNum + "&content=" + document.getElementById("replyinput"+postNum).value);
-            xhr.onreadystatechange(function () {
+            xhr.onreadystatechange = function () {
                 if(this.status == 200 && this.readyState == 4){
                     alert("发送成功！");
                 }
-            });
+            };
         }
 
         /*删除主题*/
@@ -201,13 +203,14 @@
             if(confirm("删除是不可恢复的，你确认要删除吗？")) {
                 var url = "";//*******************************
                 var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.open("POST", url, true);
                 xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
-                xhr.onreadystatechange(function () {
+                xhr.onreadystatechange = function () {
                     if (this.status == 200 && this.readyState == 4) {
                         alert("删除成功！");
                     }
-                });
+                };
             }
         }
 
@@ -216,13 +219,14 @@
             if(confirm("删除是不可恢复的，你确认要删除吗？")) {
                 var url = "";//*******************************
                 var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.open("POST", url, true);
                 xhr.send("postNum=" + postNum);
-                xhr.onreadystatechange(function () {
+                xhr.onreadystatechange = function () {
                     if (this.status == 200 && this.readyState == 4) {
                         alert("删除成功！");
                     }
-                });
+                };
             }
         }
 
@@ -231,13 +235,14 @@
             if(confirm("是否置顶该帖？")) {
                 var url = "";//*******************************
                 var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.open("POST", url, true);
                 xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
-                xhr.onreadystatechange(function () {
+                xhr.onreadystatechange = function () {
                     if (this.status == 200 && this.readyState == 4) {
                         alert("该帖已置顶！");
                     }
-                });
+                };
             }
         }
 
@@ -246,13 +251,14 @@
             if(confirm("是否取消置顶？")) {
                 var url = "";//*******************************
                 var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.open("POST", url, true);
                 xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
-                xhr.onreadystatechange(function () {
+                xhr.onreadystatechange = function () {
                     if (this.status == 200 && this.readyState == 4) {
                         alert("取消置顶成功！");
                     }
-                });
+                };
             }
         }
 
@@ -260,9 +266,10 @@
         function getThemeContent() {
             var url = "";//*******************************
             var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.open("POST", url, true);
             xhr.send("themeNum=" + document.getElementById("getThemeNum").value);
-            xhr.onreadystatechange(function () {
+            xhr.onreadystatechange = function () {
                 if(this.status == 200 && this.readyState == 4){
                     var json = this.responseText;
                     var result = eval("(" + json + ")");
@@ -297,7 +304,7 @@
                         "    </tr>\n" +
                         "</table>"
                 }
-            });
+            };
 
 
         }
@@ -307,9 +314,10 @@
             showPageControl(page);
             url = "";//*******************************
             var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.open("POST", url, true);
             xhr.send("page=" + page + "&themeNum=" + document.getElementById("getThemeNum").value);//发送页数page、主题号themeNum
-            xhr.onreadystatechange(function () {
+            xhr.onreadystatechange = function () {
                 if(this.status == 200&&this.readyState == 4){
                     var jsonObject = this.responseText;
                     var result = eval("(" + jsonObject + ")");
@@ -348,7 +356,7 @@
                     }
                     document.getElementById("postContent").innerHTML = htmlCode;
                 }
-            })
+            }
 
         }
 
@@ -362,7 +370,7 @@
             var xhr = window.XMLHttpRequest?new XMLHttpRequest():new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.send("postNum=" + postNum);
-            xhr.onreadystatechange(function () {
+            xhr.onreadystatechange = function () {
                 if(this.status = 200 && this.readyState == 4){
                     var jsonObject = this.responseText;
                     var result = eval("(" + jsonObject + ")");
@@ -373,7 +381,7 @@
                     }
                     document.getElementById("replypostblock" + postNum).innerHTML = postReply + replyContent + replyBackButton;
                 }
-            });
+            };
                    }
         function replyBackFunction(postNum) {//令回复内容收起
             document.getElementById("replypostblock" + postNum).innerHTML = "";/*replypostblock里面的东西消失*/
@@ -383,6 +391,7 @@
         function showPageControl(page){
             var url = "";//*******************************
             var xhr = window.createXmlHttpRequest()?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.open('post', url, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send("themeNum" + document.getElementById("getThemeNum").value);

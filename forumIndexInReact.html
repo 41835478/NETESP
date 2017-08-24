@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        table{
+            border: 1px skyblue solid;
+        }
+
+        td{
+            height: 30px;
+        }
+
+        .forumLogo{
+            vertical-align: middle;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        .boardLogo{
+            width: 60px;
+            height: 60px;
+        }
+
+        .boardMaster{
+            width: 120px;
+            text-align: center;
+            color: darkslategray;
+            font-size: 14px;
+        }
+
+        .boardDescribe{
+            font-size: 10px;
+            color: grey;
+        }
+
+        table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+    </style>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+
+</head>
+<body>
+
+
+
+<div id="boardlist"></div>
+
+<script type="text/babel">
+
+    var aBoard = <table><tr><td className="boardLogo" rowSpan="2" ></td><td className="boardName"></td><td className="boardMaster" rowSpan="2"></td></tr><tr><td className="boardDescribe"></td></tr></table>;
+    ReactDOM.render(aBoard, document.getElementById("boardlist"));
+
+    var forumLogo = <img className="forumLogo" src="./IMG/forum_logo.gif" alt="forumLogo"/>;
+    ReactDOM.render(
+        forumLogo,
+        document.getElementsByClassName("boardLogo")[0]
+    );
+
+    var boardName = <span>小菊花妈妈课堂</span>;
+    var boardDescribe = <span>小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!</span>;
+    var boardMaster = <span>妇女之友范育文</span>;
+
+    ReactDOM.render(boardName, document.getElementsByClassName("boardName")[0]);
+    ReactDOM.render(boardDescribe, document.getElementsByClassName("boardDescribe")[0]);
+    ReactDOM.render(boardMaster, document.getElementsByClassName("boardMaster")[0]);
+
+
+</script>
+
+</body>
+</html>
