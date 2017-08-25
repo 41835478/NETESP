@@ -12,11 +12,28 @@
         }
 
         table{
-            border: 1px skyblue solid;
+            border-top: 1px skyblue solid;
+            border-bottom: 1px skyblue solid;
+            font-family: "黑体";
         }
 
         td{
             height: 30px;
+        }
+
+        .header{
+            width: 100%;
+            height: 60px;
+            background-color: rebeccapurple;
+            margin-bottom: 10px;
+        }
+
+        .title{
+            display: inline-block;
+            color:white;
+            font-size: 30px;
+            margin: 10px;
+            font-family: "黑体";
         }
 
         .forumLogo{
@@ -31,11 +48,22 @@
             height: 60px;
         }
 
+        .forumName{
+            text-decoration: none;
+            color: black;
+            font-weight:bold;
+        }
+
+        .boardName:hover{
+            text-decoration: underline;
+        }
+
         .boardMaster{
             width: 120px;
             text-align: center;
             color: darkslategray;
             font-size: 14px;
+            font-weight:bold;
         }
 
         .boardDescribe{
@@ -54,31 +82,94 @@
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
 
 </head>
-<body>
+<body onload="postRequest()">
 
+<div class="header">
+
+    <span class="title">论坛版块</span>
+
+</div>
 
 
 <div id="boardlist"></div>
 
 <script type="text/babel">
 
+    /*var board = {
+        boardName:"小菊花妈妈课堂",
+        boardDescribe:"小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!",
+        boardMaster:"妇女之友范育文"
+    }
+
     var aBoard = <table><tr><td className="boardLogo" rowSpan="2" ></td><td className="boardName"></td><td className="boardMaster" rowSpan="2"></td></tr><tr><td className="boardDescribe"></td></tr></table>;
     ReactDOM.render(aBoard, document.getElementById("boardlist"));
-
     var forumLogo = <img className="forumLogo" src="./IMG/forum_logo.gif" alt="forumLogo"/>;
-    ReactDOM.render(
-        forumLogo,
-        document.getElementsByClassName("boardLogo")[0]
-    );
+    var boardName = <a className="boardName" href="#">{board.boardName}</a>;
+    var boardDescribe = <span>{board.boardDescribe}</span>;
+    var boardMaster = <span>{board.boardMaster}</span>;
 
-    var boardName = <span>小菊花妈妈课堂</span>;
-    var boardDescribe = <span>小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!</span>;
-    var boardMaster = <span>妇女之友范育文</span>;
-
+    ReactDOM.render(forumLogo, document.getElementsByClassName("boardLogo")[0]);
     ReactDOM.render(boardName, document.getElementsByClassName("boardName")[0]);
     ReactDOM.render(boardDescribe, document.getElementsByClassName("boardDescribe")[0]);
-    ReactDOM.render(boardMaster, document.getElementsByClassName("boardMaster")[0]);
+    ReactDOM.render(boardMaster, document.getElementsByClassName("boardMaster")[0]);*/
 
+    var result = [
+        {
+            boardName:"小菊花妈妈课堂1",
+            boardDescribe:"小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!",
+            boardMaster:"妇女之友范育文"
+        },
+        {
+            boardName:"小菊花妈妈课堂2",
+            boardDescribe:"小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!",
+            boardMaster:"妇女之友范育文"
+        },
+        {
+            boardName:"小菊花妈妈课堂3",
+            boardDescribe:"小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是欠揍,用菊花牌棒球棍 . 小菊花妈妈课堂开课啦，孩子撸管老不射，多半是废了。小菊花妈妈课堂开课啦，孩子咳嗽老不好，多半是不想去上学装的，打一顿就好啦!",
+            boardMaster:"妇女之友范育文"
+        }
+
+    ];
+
+    for(var i = 0; i < result.length; i++){
+        displayBoard(result[i], i);
+    }
+
+    function displayBoard(board, i) {
+
+        var aBoard = <table><tr><td className="boardLogo" rowSpan="2" ></td><td className="boardName"></td><td className="boardMaster" rowSpan="2"></td></tr><tr><td className="boardDescribe"></td></tr></table>;
+        ReactDOM.render(aBoard, document.getElementById("boardlist"));
+        var href_s = "${pageContext.request.contextPath }/forum/boardThemes?boardName="+board.boardName;
+        var forumLogo = <img className="forumLogo" src="${pageContext.request.contextPath }/views/forum/IMG/forum_logo.gif" alt="forumLogo"/>;
+        var boardName = <a className="forumName" href={href_s}>{board.boardName}</a>;
+        var boardDescribe = <span>{board.boardDescribe}</span>;
+        var boardMaster = <span>{board.boardMaster}</span>;
+
+        ReactDOM.render(forumLogo, document.getElementsByClassName("boardLogo")[i]);
+        ReactDOM.render(boardName, document.getElementsByClassName("boardName")[i]);
+        ReactDOM.render(boardDescribe, document.getElementsByClassName("boardDescribe")[i]);
+        ReactDOM.render(boardMaster, document.getElementsByClassName("boardMaster")[i]);
+
+        ReactDOM.render(<p>good</p>, document.getElementById("boardlist"));
+    }
+
+    /*function postRequest(){
+        url="${pageContext.request.contextPath }/forum/loadBoardInfo";
+        var xhr = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open("POST", url, true);
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200){
+                var jsonObject = this.responseText;
+                var result = eval("(" + jsonObject + ")");
+                for(var i = 0; i < result.length; i++){
+                    displayBoard(result[i], i);
+                }
+            }
+        }
+    }*/
 
 </script>
 
