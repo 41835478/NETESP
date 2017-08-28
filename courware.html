@@ -60,7 +60,6 @@
 
         .content > ul {
             width: 100%;
-
         }
 
         li {
@@ -90,9 +89,18 @@
             text-align: center;
         }
 
-        #createcoursewarebox {
+        #modifycoursewarebox{
             width: 400px;
-            height: 330px;
+            height: 430px;
+            position: fixed;
+            background-color: lightgreen;
+            top: 20%;
+            left: 40%;
+        }
+
+        #createcoursewarebox{
+            width: 400px;
+            height: 400px;
             position: fixed;
             background-color: lightgreen;
             top: 20%;
@@ -246,8 +254,7 @@
                             "<td>" + object.commendLevel + "</td>\n" +
                             "<td>" + object.cpursewareType + "</td>\n" +
                             "<td><a href='" + object.contentUrl + "'>" + object.contentUrl + "</a></td>\n" +
-                            "<td><button>修改</button></td>"
-                        ;
+                            "<td><button onclick=\"modifyCourseware(object.coursewareId,object.coursewareName,object.speakerName,object.speakerInfo,object.coursewareDuration,object.commendLevel,object.description,object.cpursewareType,object.contentUrl,name)\">修改</button></td>\n";
                     }
 
                     document.getElementById("coursewaretable").innerHTML = htmlCode;
@@ -258,9 +265,8 @@
         }
         /*************/
 
-        /*新建删除课件相关方法*/
+        /*新建修改删除课件相关方法*/
         function createCourseware(name) {
-            //document.getElementById("courseClassification").innerText = name;
             document.getElementById("createcoursewarebox").hidden = false;
         }
         function closeCreateCourseware() {
@@ -270,10 +276,11 @@
             document.getElementById("newCoursewareTime").value = "";
             document.getElementById("newCoursewareCommendLevel").value = 1;
             document.getElementById("newCoursewareDescription").value = "";
-
+            document.getElementById("newCoursewareType").value = "";
+            document.getElementById("newCoursewareUrl").value = "";
             document.getElementById("createcoursewarebox").hidden = true;
         }
-        function sendcreateCoursewareRequest() {
+        function sendCreateCoursewareRequest() {
             var coursewareName = document.getElementById("newCoursewareName").value;
             var speakerName = document.getElementById("newCoursewareSpeaker").value;
             var speakerInfo = document.getElementById("newCoursewareSpeakerInfo").value;
@@ -281,6 +288,8 @@
             var commendLevel = document.getElementById("newCoursewareCommendLevel").value;
             var description = document.getElementById("newCoursewareDescription").value;
             var cwcfId = document.getElementById("getClassificationId").value;
+            var coursewareType = document.getElementById("newCoursewareType").value;
+            var contentUrl = document.getElementById("newCoursewareUrl").value;
 
             var xhr = createXmlHttpRequest();
             var url = "saveCourseware";
@@ -288,7 +297,8 @@
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             var classificationId = document.getElementById("getClassificationId").value;
             xhr.send("cwcfId=" + cwcfId + "&coursewareName=" + coursewareName + "&speakName=" + speakerName + "&speakerInfo=" + speakerInfo +
-                "&coursewareDuration=" + coursewareDuration + "&commendLevel=" + commendLevel + "&description=" + description);
+                "&coursewareDuration=" + coursewareDuration + "&commendLevel=" + commendLevel + "&description=" + description + "&cpursewareType=" +
+                coursewareType + "&contentUrl=" + contentUrl);
             this.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText == 1) {
@@ -301,6 +311,90 @@
 
                 }
             }
+        }
+        function modifyCourseware(id, name, speakerName, speakerInfo, Duration, commandLevel, description, type, contentUrl, currentClassificationName){
+            document.getElementById("modifyCoursewareId").value = id;
+            document.getElementById("modifyCoursewareName").value = name;
+            document.getElementById("modifyCoursewareSpeaker").value = speakerName;
+            document.getElementById("modifyCoursewareSpeakerInfo").value = speakerInfo;
+            document.getElementById("modifyCoursewareTime").value = Duration;
+            document.getElementById("modifyCoursewareCommendLevel").value = commandLevel;
+            document.getElementById("modifyCoursewareDescription").value = description;
+            document.getElementById("modifyCoursewareType").value = type;
+            document.getElementById("modifyCoursewareUrl").value = contentUrl;
+
+            var xhr = createXmlHttpRequest();
+            var url = "getAllCoursewareClassification";
+            xhr.open("post", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            var classificationId = document.getElementById("getClassificationId").value;
+            xhr.send(null);
+            this.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var jsonObject = this.responseText;
+                    var result = eval("("+jsonObject+")");
+                    var select = document.getElementById("cwcfid");
+                    var currentOption = createElement(option);
+                    var currentClassificationId = document.getElementById("getClassificationId").value;
+                    currentOption.value = currentClassification;
+                    currentOption.innerText = currentClassificationName;
+                    select.appendChild(currentOption);
+                    for(var object in result){
+                        var newOption = document.createElement(option);
+                        if(object.cwcfId != currentClassificationId){
+                            newOption.value = object.cwcfId;
+                            newOption.innerText = object.classificationName;
+                            select.appendChild(newOption);
+                        }
+                    }
+                }
+            }
+
+
+            document.getElementById("modifycoursewarebox").hidden = false;
+        }
+        function sendModifyCoursewareRequest() {
+            var coursewareName = document.getElementById("modifyCoursewareName").value;
+            var speakerName = document.getElementById("modifyCoursewareSpeaker").value;
+            var speakerInfo = document.getElementById("modifyCoursewareSpeakerInfo").value;
+            var coursewareDuration = document.getElementById("modifyCoursewareTime").value;
+            var commendLevel = document.getElementById("modifyCoursewareCommendLevel").value;
+            var description = document.getElementById("modifyCoursewareDescription").value;
+            var coursewareId = document.getElementById("modifyCoursewareId").value;
+            var coursewareType = document.getElementById("newCoursewareType").value;
+            var cwcfId = "";
+            var contentUrl = document.getElementById("newCoursewareUrl").value;
+
+            var xhr = createXmlHttpRequest();
+            var url = "saveCourseware";
+            xhr.open("post", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            var classificationId = document.getElementById("getClassificationId").value;
+            xhr.send("cwcfId=" + cwcfId + "&coursewareName=" + coursewareName + "&speakName=" + speakerName + "&speakerInfo=" + speakerInfo +
+                "&coursewareDuration=" + coursewareDuration + "&commendLevel=" + commendLevel + "&description=" + description + "&cpursewareType=" +
+                coursewareType + "&contentUrl=" + contentUrl);
+            this.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText == 1) {
+                        alert("修改课件成功！");
+                        closeCreateCourseware();
+                    }
+                    else {
+                        alert("修改课件失败！");
+                    }
+                }
+            }
+        }
+        function closeModifyCourseware() {
+            document.getElementById("modifyCoursewareName").value = "";
+            document.getElementById("modifyCoursewareSpeaker").value = "";
+            document.getElementById("modifyCoursewareSpeakerInfo").value = "";
+            document.getElementById("modifyCoursewareTime").value = "";
+            document.getElementById("modifyCoursewareCommendLevel").value = 1;
+            document.getElementById("modifyCoursewareDescription").value = "";
+            document.getElementById("modifyCoursewareType").value = "";
+            document.getElementById("modifyCoursewareUrl").value = "";
+            document.getElementById("modifycoursewarebox").hidden = true;
         }
         function deleteCourseware() {
             //删除课件
@@ -317,11 +411,14 @@
                 var url = "deleteCourseware";
                 xhr.open("post", url, true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send("list=" + sendArray);
+                xhr.send("coursewareId=" + sendArray);
                 xhr.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        if (this.responseText) {
+                        var result = this.responseText;
+                        if (result) {
                             alert("删除课件成功!");
+                        }else{
+                            alert("删除失败!");
                         }
                     }
                 }
@@ -350,13 +447,21 @@
             var newClassName = prompt("在当前分类新建子分类：", "请输入分类名");
             if (newClassName.length != 0) {
                 var xhr = createXmlHttpRequest();
-                var url = "createClassification";
+                var url = "saveCoursewareClassification";
                 xhr.open("post", url, true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send("");
+                xhr.send("classificationName=" + newClassName + "&parentId=" + document.getElementById("getClassificationId").value);
                 this.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        alert("新建子课件成功");
+                        var result = this.responseText;
+                        if (result == 1){
+                            alert("新建子课件成功");
+                            location.reload();
+                        }else if(result == 2){
+                            alert("当前分类名已存在！");
+                        }else{
+                            alert("未知原因导致新建分类失败！")
+                        }
                     }
                 }
             }
@@ -434,7 +539,7 @@
                                                                                                       src="./IMG/plus.gif"
                                                                                                       alt="plus"></a>
             </td>
-            <td><a href="javascript:void(0)" onclick="getCourseware(1, '根目录')">课件分类</a></td>
+            <td><a href="javascript:void(0)" onclick="getCourseware(1, '根目录')">根目录</a></td>
         </tr>
 
     </table>
@@ -451,7 +556,7 @@
 
     <table id="coursewaretable"></table>
 
-    <div id="createcoursewarebox" hidden>
+    <div id="createcoursewarebox" class="coursewarebox" hidden>
         <table class="createcoursetable">
             <tr>
                 <th colspan="2">课件信息</th>
@@ -487,13 +592,78 @@
                 <td><input id="newCoursewareDescription" class="courseInput"></td>
             </tr>
             <tr>
+                <td>课件类型：</td>
+                <td><input id="newCoursewareType" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>课件地址：</td>
+                <td><input id="newCoursewareUrl" class="courseInput"></td>
+            </tr>
+            <tr>
                 <td>当前分类：</td>
                 <td id="currentClassification"></td>
             </tr>
         </table>
         <div class="buttonBox" style="text-align: center; padding: 5px">
-            <button onclick="sendcreateCoursewareRequest()">确认</button>
+            <button onclick="sendCreateCoursewareRequest()">确认</button>
             <button onclick="closeCreateCourseware()">取消</button>
+        </div>
+    </div>
+    <div id="modifycoursewarebox" class="coursewarebox" hidden>
+        <table class="createcoursetable">
+            <tr>
+                <th colspan="2">课件信息</th>
+            </tr>
+            <tr>
+                <td style="width: 6em">课件ID：</td>
+                <td><input id="modifyCoursewareId" disabled class="courseInput"><br></td>
+            </tr>
+            <tr>
+                <td>课件名称：</td>
+                <td><input id="modifyCoursewareName" class="courseInput"><br></td>
+            </tr>
+            <tr>
+                <td>主讲人：</td>
+                <td><input id="modifyCoursewareSpeaker" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>主讲人概况：</td>
+                <td><input id="modifyCoursewareSpeakerInfo" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>课件时长：</td>
+                <td><input id="modifyCoursewareTime" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>推荐等级：</td>
+                <td><select id="modifyCoursewareCommendLevel" class="courseInput" name="commendLevel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>课件描述：</td>
+                <td><input id="modifyCoursewareDescription" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>课件类型：</td>
+                <td><input id="modifyCoursewareType" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>课件地址：</td>
+                <td><input id="modifyCoursewareUrl" class="courseInput"></td>
+            </tr>
+            <tr>
+                <td>课件分类：</td>
+                <td id="modifyCousewareClassification"><select class="courseInput" name="cwcfId" id="cwcfid"></select></td>
+            </tr>
+        </table>
+        <div class="buttonBox" style="text-align: center; padding: 5px">
+            <button onclick="sendModifyCoursewareRequest()">修改</button>
+            <button onclick="closeModifyCourseware()">取消</button>
         </div>
     </div>
 
