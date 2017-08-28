@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,36 @@
             padding:0;
         }
 
-        .header{
+        .header,.bottom{
             width: 100%;
             background-color: rebeccapurple;
             color: #fff;
+        }
+
+        .header{
+            margin-bottom: 10px;
+        }
+
+        .bottom{
+            text-align: center;
+            color:#efd3f2;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        #lastPage{
+            float: left;color: #FFFFFF;text-decoration: none;padding-left: 10px
+        }
+        #lastPage:hover{
+            text-decoration: underline;
+        }
+
+        #nextPage{
+            float: right;color: #FFFFFF;text-decoration: none;padding-right: 10px;
+        }
+        #nextPage:hover{
+            text-decoration: underline;
         }
 
         .searchleft{
@@ -29,25 +56,101 @@
             height: 16px;
         }
 
-        #searchButton{
+        #searchbutton{
             text-decoration: none;
             color: #FFFFFF;
         }
 
-        #searchButton:hover{
+        #searchbutton:hover{
+            text-decoration: underline;
+        }
 
+        .searchresult{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th{
+            border: 1px skyblue solid;
+        }
+
+        td{
+            border: 1px skyblue solid;
         }
 
     </style>
 
+    <script>
+        function getNextPage() {
+            //打开获取下一页的链接
+            var keyword = document.getElementById("getKeyword").value;
+            var page = (document.getElementById("getCurrentPage")==document.getElementById("getTotalPages").value)?document.getElementById("getCurrentPage"):++document.getElementById("getCurrentPage").value;
+            window.location.href = "?keyword=" + keyword + "&page=" + page;
+        }
+        function getLastPage() {
+            //打开获取上一页的链接
+            var keyword = document.getElementById("getKeyword").value;
+            var page = (document.getElementById("getCurrentPage").value==1)?1:(--document.getElementById("getCurrentPage").value);
+            window.location.href = "?keyword=" + keyword + "&page=" + page;
+        }
+        function search() {
+            var keyword = document.getElementById("searchInput").value;
+            window.location.href  = "?keyword=" + keyword + "&page=1";
+        }
+    </script>
+
 </head>
 <body>
+<input id="getKeyword" type="hidden" value="${keyword}">
+<input id="getCurrentPage" type="hidden" value="${currentPage}">
+<input id="getTotalPages" type="hidden" value="${totalPages}">
 
 <div class="header">
 
     <span class="searchleft">"${keyword}"的搜索结果</span>
-    <a class="searchright" href="#" id="searchButton">搜索</a>
-    <input class="searchright">
+    <a class="searchright" id="searchbutton" href="javascript:void(0)" onclick="search()">搜索</a>
+    <input class="searchright" id="searchInput" style="height: 22px;" value="${keyword}">
+
+</div>
+
+<div class="content">
+
+    <table class="searchresult">
+        <tr>
+            <th>主题</th>
+            <th>作者/创建时间</th>
+            <th>回帖数量</th>
+            <th>最后回帖/最后回帖时间</th>
+        </tr>
+
+        <c:forEach items="${list}" var="item">
+
+            <tr>
+                <td><a href="${item.postURL}">${item.topicName}</a></td>
+                <td>
+                    ${item.creator}
+                    <br>
+                    ${item.createTime}
+                </td>
+                <td>${item.postNum}</td>
+                <td>
+                    ${item.lasterPoster}
+                    <br>
+                    ${item.lastPosterTime}
+                </td>
+            </tr>
+
+        </c:forEach>
+
+    </table>
+
+</div>
+
+<div class="bottom">
+
+    <a href="javascript:void(0)" onclick="getLastPage()" id="lastPage" >上一页</a>
+    <span>现在是第${currentPage}页</span>
+    <a href="javascript:void(0)" onclick="getNextPage()" id="nextPage">下一页</a>
 
 </div>
 

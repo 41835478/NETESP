@@ -65,7 +65,7 @@
                         "        <td>" + creator + "<br />"+
                         "		 <span>"+ (new Date(createTime)).toLocaleDateString() +"</span></td>\n" +
                         "        <td>" + postNum + "</td>\n" +
-                        "        <td>" + lastPoster + "<br />" + (new Date(createTime)).toLocaleDateString() + 
+                        "        <td>" + lastPoster + "<br />" + (new Date(lastPostTime)).toLocaleDateString() +
                         "		 </td>\n" +
                         "    </tr>";
                     }
@@ -155,17 +155,16 @@
                     document.getElementById("page").value = page;
                 }
             }
-
-
-
         }
 
         function jumpToPage() {
             getPosts(document.getElementById("page").value);
         }
 
-    function searchTheme
-
+        function search() {
+            var keyword = document.getElementById("searchInput").value;
+            window.location.href = "?keyword=" + keyword + "&page=1";
+        }
 
     </script>
 
@@ -179,8 +178,8 @@
 <div class="header">
     <a href="${pageContext.request.contextPath }/forum/index" class="backButton">返回论坛列表</a>
     <a href="${pageContext.request.contextPath }/forum/postTheme?boardName=${boardName}" class="postLink">发布帖子</a>
-    <button>搜索</button>
-    <input class="searchBar" type="text" placeholder="搜索内容">
+    <button onclick="search()">搜索</button>
+    <input class="searchBar" id="searchInput" type="text" placeholder="搜索内容">
 </div>
 
 <table class="topPosts" id="topPosts"><!--置顶帖子-->
