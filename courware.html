@@ -1,8 +1,10 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>课件管理</title>
+
     <style type="text/css">
 
         * {
@@ -42,33 +44,6 @@
             display: inline-block;
             float: left;
             width: 80%;
-        }
-
-        .navtablink {
-            display: inline-block;
-            width: 100%;
-            padding: 10px 0px;
-            color: #fff;
-            font-family: "黑体";
-            text-decoration: none;
-        }
-
-        .navtablink:hover {
-            background-color: yellowgreen;
-
-        }
-
-        .content > ul {
-            width: 100%;
-        }
-
-        li {
-            color: #fff;
-            width: 20%;
-            text-align: center;
-            list-style-type: none;
-            float: left;
-            background-color: green;
         }
 
         .content > table {
@@ -210,12 +185,12 @@
         /*获取分类下的课件*/
         function getCourseware(id, name) {
             document.getElementById("classificationCRUD").innerHTML =
-                "<ul>\n" +
-                "<li><a class=\"navtablink\" href=\"javascript:void(0)\" onclick=\"createClassification()\">新增分类</a></li>\n" +
-                "<li><a class=\"navtablink\" href=\"javascript:void(0)\" onclick=\"modifyClassification('" + name + "')\">修改分类</a></li>\n" +
-                "<li><a class=\"navtablink\" href=\"javascript:void(0)\" onclick=\"deleteClassification(" + id + ")\">删除分类</a></li>\n" +
-                "<li><a class=\"navtablink\" href=\"javascript:void(0)\" onclick=\"createCourseware(" + id + ")\">新增课件</a></li>\n" +
-                "<li><a class=\"navtablink\" href=\"javascript:void(0)\" onclick=\"deleteCourseware()\">删除课件</a></li>\n" +
+                "<ul class='navtablist'>\n" +
+                "<li style='width: 20%;'><a href=\"javascript:void(0)\" onclick=\"createClassification()\">新增分类</a></li>\n" +
+                "<li style='width: 20%;'><a href=\"javascript:void(0)\" onclick=\"modifyClassification('" + name + "')\">修改分类</a></li>\n" +
+                "<li style='width: 20%;'><a href=\"javascript:void(0)\" onclick=\"deleteClassification(" + id + ")\">删除分类</a></li>\n" +
+                "<li style='width: 20%;'><a href=\"javascript:void(0)\" onclick=\"createCourseware(" + id + ")\">新增课件</a></li>\n" +
+                "<li style='width: 20%;'><a href=\"javascript:void(0)\" onclick=\"deleteCourseware()\">删除课件</a></li>\n" +
                 "</ul>"
             ;
             //获取并显示当前目录的课件
@@ -524,6 +499,7 @@
         /**************/
 
     </script>
+    <link rel="stylesheet" href="CSS/JFButtonList.css">
 </head>
 
 
