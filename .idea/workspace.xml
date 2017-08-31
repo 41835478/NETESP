@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/forumIndexInReact.html" line="113" mnemonic="8" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="dbd73866-5368-49fd-9d2b-35d0d8aa67a8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/forumIndexInReact.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/studyTask.html" afterPath="$PROJECT_DIR$/studyTask.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -76,8 +75,8 @@
       <file leaf-file-name="studyTask.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/studyTask.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="310" column="45" lean-forward="true" selection-start-line="310" selection-start-column="45" selection-end-line="310" selection-end-column="45" />
+            <state relative-caret-position="105">
+              <caret line="7" column="50" lean-forward="true" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -87,17 +86,28 @@
                 <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h1#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#10587#10646#0" expanded="false" />
-                <element signature="e#11617#11729#0" expanded="false" />
-                <element signature="e#11765#11882#0" expanded="false" />
-                <element signature="e#11914#12173#0" expanded="false" />
-                <element signature="e#12204#12326#0" expanded="false" />
-                <element signature="e#12357#12888#0" expanded="false" />
-                <element signature="e#12919#13459#0" expanded="false" />
-                <element signature="e#13501#13995#0" expanded="false" />
-                <element signature="e#15571#16542#0" expanded="false" />
-                <marker date="1504163183000" expanded="true" signature="6391:6401" ph="..." />
+                <element signature="e#10651#10710#0" expanded="false" />
+                <element signature="e#10744#11649#0" expanded="false" />
+                <element signature="e#11681#11793#0" expanded="false" />
+                <element signature="e#11829#11946#0" expanded="false" />
+                <element signature="e#11978#12237#0" expanded="false" />
+                <element signature="e#12268#12390#0" expanded="false" />
+                <element signature="e#12421#12952#0" expanded="false" />
+                <element signature="e#12983#13523#0" expanded="false" />
+                <element signature="e#13565#14059#0" expanded="false" />
+                <element signature="e#15635#16606#0" expanded="false" />
+                <marker date="1504163782000" expanded="true" signature="6455:6465" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forumIndex.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/forumIndex.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1395">
+              <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -258,12 +268,12 @@
       <workItem from="1503813015479" duration="114000" />
       <workItem from="1503882532237" duration="18837000" />
       <workItem from="1504056049207" duration="18307000" />
-      <workItem from="1504141221220" duration="12669000" />
+      <workItem from="1504141221220" duration="13018000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113941000" />
+    <option name="totallyTimeSpent" value="114290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
@@ -340,6 +350,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1395">
           <caret line="93" column="9" lean-forward="true" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -537,13 +548,6 @@
     <entry file="file://$PROJECT_DIR$/QuestionBank/DifficultyAdd.html" />
     <entry file="file://$PROJECT_DIR$/QuestionBank/DifficultyMaintenance.html" />
     <entry file="file://$PROJECT_DIR$/QuestionBank/QuestionTypeMaintenance.html" />
-    <entry file="file://$PROJECT_DIR$/forumIndex.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/QuestionBank/QuestionManagement.html" />
     <entry file="file://$PROJECT_DIR$/utf8-jsp/QuestionBankManagement.html" />
     <entry file="file://$PROJECT_DIR$/QuestionBank/QuestionCheckMore.html" />
@@ -615,10 +619,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/forumIndex.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1395">
+          <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/studyTask.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="310" column="45" lean-forward="true" selection-start-line="310" selection-start-column="45" selection-end-line="310" selection-end-column="45" />
+        <state relative-caret-position="105">
+          <caret line="7" column="50" lean-forward="true" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
           <folding>
             <element signature="n#style#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -628,16 +640,17 @@
             <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h1#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#10587#10646#0" expanded="false" />
-            <element signature="e#11617#11729#0" expanded="false" />
-            <element signature="e#11765#11882#0" expanded="false" />
-            <element signature="e#11914#12173#0" expanded="false" />
-            <element signature="e#12204#12326#0" expanded="false" />
-            <element signature="e#12357#12888#0" expanded="false" />
-            <element signature="e#12919#13459#0" expanded="false" />
-            <element signature="e#13501#13995#0" expanded="false" />
-            <element signature="e#15571#16542#0" expanded="false" />
-            <marker date="1504163183000" expanded="true" signature="6391:6401" ph="..." />
+            <element signature="e#10651#10710#0" expanded="false" />
+            <element signature="e#10744#11649#0" expanded="false" />
+            <element signature="e#11681#11793#0" expanded="false" />
+            <element signature="e#11829#11946#0" expanded="false" />
+            <element signature="e#11978#12237#0" expanded="false" />
+            <element signature="e#12268#12390#0" expanded="false" />
+            <element signature="e#12421#12952#0" expanded="false" />
+            <element signature="e#12983#13523#0" expanded="false" />
+            <element signature="e#13565#14059#0" expanded="false" />
+            <element signature="e#15635#16606#0" expanded="false" />
+            <marker date="1504163782000" expanded="true" signature="6455:6465" ph="..." />
           </folding>
         </state>
       </provider>
