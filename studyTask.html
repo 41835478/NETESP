@@ -1,6 +1,3 @@
-<!--
-    修改操作 bug:不能关闭box
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +30,7 @@
         #modifybox{
             border: 1px darkgreen solid;
             width: 400px;
-            height: 250px;
+            height: 280px;
             background-color: #bfa;
             position: fixed;
             margin: auto;
@@ -80,9 +77,8 @@
 </head>
 <body onload="loadStudyTask()">
 <ul class="navtablist">
-    <li style="width: 33.33%"><a href="javascript:void(0)" onclick="createStudyTask()" class="navtablink">增加学习任务</a></li>
-    <li style="width: 33.33%"><a href="javascript:void(0)" onclick="modifyStudyTask()" class="navtablink">修改学习任务</a></li>
-    <li style="width: 33.33%"><a href="javascript:void(0)" onclick="deleteStudyTask()" class="navtablink">删除学习任务</a></li>
+    <li style="width: 50%"><a href="javascript:void(0)" onclick="createStudyTask()" class="navtablink">增加学习任务</a></li>
+    <li style="width: 50%"><a href="javascript:void(0)" onclick="deleteStudyTask()" class="navtablink">删除学习任务</a></li>
 </ul>
 
 <div class="content">
@@ -118,14 +114,14 @@
             <td><button class="input" onclick="showCoursewareSelect()">选择学习课件</button></td>
         </tr>
     </table>
-    <button onclick="">新建</button><button onclick="closeCreateBox()">取消</button>
+    <button onclick="createRequest()">新建</button><button onclick="closeCreateBox()">取消</button>
 </div>
 <div id="selectstuff" hidden>
     <a href="javascript:void(0)" onclick="backToCreateBox()">&lt返回</a>
     <table>
         <tr><th style="width: 4em"><input class="selectall" type="checkbox" onclick="selectAll(this.checked, 0)">全选</th><th>部门</th></tr>
         <c:foreach item="${department}" var="item">
-            <tr><th><input class="departmentinput" id="${item.id}" type="checkbox"></th><th>${item.name}</th></tr>
+            <tr><th><input class="departmentinput" id="department${item.id}" type="checkbox"></th><th>${item.name}</th></tr>
         </c:foreach>
     </table>
 </div>
@@ -135,7 +131,7 @@
     <table>
         <tr><th style="width: 4em"><input class="selectall" type="checkbox" onclick="selectAll(this.checked, 1)">全选</th><th>课件</th></tr>
         <c:foreach item="${courseware}" var="item">
-            <tr><th><input class="coursewareinput" id="${item.id}" type="checkbox"></th><th>${item.name}</th></tr>
+            <tr><th><input class="coursewareinput" id="courseware${item.id}" type="checkbox"></th><th>${item.name}</th></tr>
         </c:foreach>
     </table>
 </div>
@@ -143,6 +139,10 @@
 <div id="modifybox" hidden>
     <h1 style="font-size: 20px">修改学习任务</h1>
     <table>
+        <tr>
+            <th>任务ID</th>
+            <td><input id="modifyid" class="input" disabled></td>
+        </tr>
         <tr>
             <th>任务名称</th>
             <td><input id="newtaskname" class="input"></td>
@@ -164,7 +164,7 @@
             <td><button class="input" onclick="showCoursewareSelect()">选择学习课件</button></td>
         </tr>
     </table>
-    <button onclick="">修改</button><button onclick="closeModifyBox()">取消</button>
+    <button onclick="modifyRequest()">修改</button><button onclick="closeModifyBox()">取消</button>
 </div>
 
 </body>
@@ -179,13 +179,14 @@
 
     /*createbox里的三个参数*/
     var taskNameInput = document.getElementById("taskname");
-    var endDateInput = document.getElementById("startdate");
-    var startDateInput = document.getElementById("enddate");
+    var startDateInput = document.getElementById("startdate");
+    var endDateInput = document.getElementById("enddate");
 
-    /*modifybox里的三个参数*/
+    /*modifybox里的四个参数*/
+    var newId = document.getElementById("modifyid");
     var newTaskNameInput = document.getElementById("newtaskname");
-    var newEndDateInput = document.getElementById("newstartdate");
-    var newStartDateInput = document.getElementById("newenddate");
+    var newStartDateInput = document.getElementById("newestartdate");
+    var newEndDateInput = document.getElementById("newenddate");
 
     /*checkbox数组*/
     var studyTaskArray = document.getElementsByClassName("studyTaskInput");
@@ -195,6 +196,8 @@
 
     /*判断是create还是modify的参数, 0为create, 1为modify*/
     var CorM;
+    /*用于保存要修改项目的id*/
+    var modifyId;
 
     /*异步获取学习计划*/
     function loadStudyTask() {
@@ -208,6 +211,7 @@
             "<th>开始日期</th>\n" +
             "<th>结束日期</th>\n" +
             "<th>学习课件</th>\n" +
+            "<th>操作</th>"
             "</tr>";
 
         for (var i = 0; i < 5; i++){
@@ -223,18 +227,21 @@
             var beginDate = document.createElement('td');
             var endDate = document.createElement('td');
             var courseware = document.createElement('td');
+            var operation = document.createElement('td');
             newCheckBox.id = "delete" + i;
             taskName.innerText = "test";
             stuff.innerText = "tester";
             beginDate.innerText = "tester";
             endDate.innerText = "tester";
             courseware.innerText = "tester";
+            operation.innerHTML = "<a class='modifybutton' onclick='modifyStudyTask(" + i + ")'>修改</a>"
             newTr.appendChild(newCheckBoxTd);
             newTr.appendChild(taskName);
             newTr.appendChild(stuff);
             newTr.appendChild(beginDate);
             newTr.appendChild(endDate);
             newTr.appendChild(courseware);
+            newTr.appendChild(operation)
             table.appendChild(newTr);
         }
 
@@ -260,31 +267,55 @@
                     var beginDate = document.createElement('td');
                     var endDate = document.createElement('td');
                     var courseware = document.createElement('td');
-                    newCheckBox.id = "delete" + resultArray.id;
-                    taskName.innerText = resultArray.taskName;
-                    stuff.innerText = resultArray.stuff;
-                    beginDate.innerText = resultArray.beginDate;
-                    endDate.innerText = resultArray.endDate;
-                    courseware.innerText = resultArray.courseware;
+                    var operation = document.createElement('td');
+                    newCheckBox.id = "course" + resultArray[i].id;
+                    taskName.innerText = resultArray[i].taskName;
+                    stuff.innerText = resultArray[i].stuff;
+                    beginDate.innerText = resultArray[i].beginDate;
+                    endDate.innerText = resultArray[i].endDate;
+                    courseware.innerText = resultArray[i].courseware;
+                    operation.innerHTML = "<a class='modifybutton' onclick='modifyStudyTask(resultArray[i].id)'>修改</a>"
                     newTr.appendChild(newCheckBoxTd);
                     newTr.appendChild(taskName);
                     newTr.appendChild(stuff);
                     newTr.appendChild(beginDate);
                     newTr.appendChild(endDate);
                     newTr.appendChild(courseware);
+                    newTr.appendChild(operation);
                     table.appendChild(newTr);
                 }
             }
         }*/
     }
 
-    /*新建学习计划*/
+    /*新建、修改学习计划*/
     function createStudyTask() {
         CorM = 0;
         createBox.hidden = false;
     }
-    function modifyStudyTask() {
+    function modifyStudyTask(id) {
+        modifyId = id;
         CorM = 1;
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        var url = "";
+        xhr.open("post", url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send("id=" + modifyId);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var jsonObject = this.responseText;
+                var result = JSON.stringify(jsonObject);
+
+                newId.value = id;
+                newTaskNameInput.value = "";
+                newStartDateInput.value = "";
+                newEndDateInput = "";
+                //填充department数据
+                //填充courseware数据
+                modifyBox.hidden = false;
+            }
+        }
+        newId.value = id;
         modifyBox.hidden = false;
     }
     function showStuffSelect() {
@@ -316,13 +347,13 @@
         taskNameInput.value = "";
         startDateInput.value = "";
         endDateInput.value = "";
-        for (var i in departmentArray){
+        for (var i = 0; i < departmentArray.length; i++){
             departmentArray[i].checked = false;
         }
-        for (var i in coursewareArray){
+        for (var i = 0; i < coursewareArray.length; i++){
             coursewareArray[i].checked = false;
         }
-        for (var i in selectAllArray){
+        for (var i = 0; i < selectAllArray.length; i++){
             selectAllArray[i].checked = false;
         }
         /*隐藏createbox*/
@@ -333,13 +364,13 @@
         newTaskNameInput.value = "";
         newStartDateInput.value = "";
         newEndDateInput.value = "";
-        for (var i in departmentArray){
+        for (var i = 0; i < departmentArray.length; i++){
             departmentArray[i].checked = false;
         }
-        for (var i in coursewareArray){
+        for (var i = 0; i < coursewareArray.length; i++){
             coursewareArray[i].checked = false;
         }
-        for (var i in selectAllArray){
+        for (var i = 0; i < selectAllArray.length; i++){
             selectAllArray[i].checked = false;
         }
         /*隐藏modifybox*/
@@ -349,15 +380,15 @@
 
     function selectAll(checked, number){
         if(number == 0){
-            for (var i in departmentArray){
+            for (var i = 0; i < departmentArray.length; i++){
                 departmentArray[i].checked = checked;
             }
         }else if (number == 1){
-            for (var i in coursewareArray){
+            for (var i = 0; i < coursewareArray.length; i++){
                 coursewareArray[i].checked = checked;
             }
         }else if (number == 2){
-            for (var i in studyTaskArray){
+            for (var i = 0; i < studyTaskArray.length; i++){
                 studyTaskArray[i].checked = checked;
             }
         }
@@ -365,7 +396,7 @@
     function createRequest(){
         var selectedDepartmentArray = new Array();
         var selectedCoursewareArray = new Array();
-        for (var i in departmentArray){
+        for (var i = 0; i <= departmentArray.length; i++){
             if (departmentArray[i].checked){
                 selectedDepartmentArray.push(departmentArray[i].id.substring(10));
             }
@@ -382,9 +413,26 @@
         xhr.send("");
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200){
+
                 alert("创建学习计划成功！");
+                loadStudyTask();
             }
         }
+    }
+    function modifyRequest() {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        var url = "";
+        xhr.open("post", url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send("id=" + modifyId);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                alert("修改成功！");
+                loadStudyTask();
+            }
+        }
+
     }
 
     /*删除学习计划*/
@@ -392,7 +440,6 @@
         var deleteArray = new Array();
         for (var i = 0; i < studyTaskArray.length; i++) {
             if (studyTaskArray[i].checked){
-                console.log(studyTaskArray[i].id.substring(6));
                 deleteArray.push(studyTaskArray[i].id.substring(6));
             }
         }
