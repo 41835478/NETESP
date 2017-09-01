@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload</title>
+</head>
+<script javascript>
+    document.getElementById("uploadbtn").onclick = function () {
+        var url = "";
+        var formData = new formData();
+        formData.append(document.getElementById("fileselector").files[0]);
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xhr.open('post', url, true);
+        xhr.upload.progress = progressFunction;
+    }
+    
+    function progressFunction(evt) {
+        
+    }
+</script>
+<body>
+
+    <input id="fileselector" type="file" name="fileUpLoad"><br>
+    <button id="uploadbtn"></button>
+
+</body>
+</html>
