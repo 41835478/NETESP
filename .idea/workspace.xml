@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbd73866-5368-49fd-9d2b-35d0d8aa67a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/studyTask.html" afterPath="$PROJECT_DIR$/studyTask.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utf8-jsp/checkStudyTask.html" afterPath="$PROJECT_DIR$/utf8-jsp/checkStudyTask.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,7 +20,7 @@
       <file leaf-file-name="forumPosts.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forumPosts.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2685">
+            <state relative-caret-position="0">
               <caret line="179" column="64" lean-forward="false" selection-start-line="179" selection-start-column="64" selection-end-line="179" selection-end-column="64" />
               <folding />
             </state>
@@ -58,56 +59,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tangram.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utf8-jsp/dialogs/wordimage/tangram.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="1334" column="0" lean-forward="false" selection-start-line="1334" selection-start-column="0" selection-end-line="1334" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="JFButtonList.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CSS/JFButtonList.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+            <state relative-caret-position="150">
+              <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="33" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studyTask.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/studyTask.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2120">
-              <caret line="514" column="12" lean-forward="false" selection-start-line="514" selection-start-column="12" selection-end-line="514" selection-end-column="12" />
-              <folding>
-                <element signature="n#style#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#h1#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#0;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h1#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#10788#10847#0" expanded="false" />
-                <element signature="e#10881#12237#0" expanded="false" />
-                <element signature="e#12269#12381#0" expanded="false" />
-                <element signature="e#12417#12534#0" expanded="false" />
-                <element signature="e#12566#12825#0" expanded="false" />
-                <element signature="e#12856#12978#0" expanded="false" />
-                <element signature="e#13009#13540#0" expanded="false" />
-                <element signature="e#13571#14111#0" expanded="false" />
-                <element signature="e#14153#14647#0" expanded="false" />
-                <element signature="e#14676#15654#0" expanded="false" />
-                <element signature="e#15684#16174#0" expanded="false" />
-                <element signature="e#16222#17192#0" expanded="false" />
-                <marker date="1504266999000" expanded="true" signature="6592:6602" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -115,39 +72,13 @@
       <file leaf-file-name="checkStudyTask.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utf8-jsp/checkStudyTask.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testUpload.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testUpload.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forumIndex.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/forumIndex.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1395">
-              <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JFTable.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CSS/JFTable.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="-1114">
+              <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+              <folding>
+                <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,6 +123,7 @@
         <option value="$PROJECT_DIR$/courware.html" />
         <option value="$PROJECT_DIR$/testUpload.html" />
         <option value="$PROJECT_DIR$/studyTask.html" />
+        <option value="$PROJECT_DIR$/CSS/JFButtonList.css" />
         <option value="$PROJECT_DIR$/utf8-jsp/checkStudyTask.html" />
       </list>
     </option>
@@ -202,7 +134,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="22" />
     <option name="width" value="1440" />
     <option name="height" value="874" />
@@ -235,6 +167,11 @@
             <path>
               <item name="forum-my_github" type="b2602c69:ProjectViewProjectNode" />
               <item name="forum-my_github" type="462c0819:PsiDirectoryNode" />
+              <item name="CSS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="forum-my_github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="forum-my_github" type="462c0819:PsiDirectoryNode" />
               <item name="IMG" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -256,7 +193,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="stringify&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/Jack/Desktop/forum-my_github/CSS/JFTable.css&#10;stringify&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -306,24 +243,24 @@
       <workItem from="1503813015479" duration="114000" />
       <workItem from="1503882532237" duration="18837000" />
       <workItem from="1504056049207" duration="18307000" />
-      <workItem from="1504141221220" duration="21268000" />
+      <workItem from="1504141221220" duration="25780000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122540000" />
+    <option name="totallyTimeSpent" value="127052000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23402777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -573,16 +510,8 @@
     <entry file="file://$PROJECT_DIR$/QuestionBank/QuestionBankManagement.html" />
     <entry file="file://$PROJECT_DIR$/forumPosts.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2685">
+        <state relative-caret-position="0">
           <caret line="179" column="64" lean-forward="false" selection-start-line="179" selection-start-column="64" selection-end-line="179" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/JFButtonList.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -591,14 +520,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/JFTable.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -616,44 +537,6 @@
         <state relative-caret-position="255">
           <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utf8-jsp/dialogs/wordimage/tangram.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="1334" column="0" lean-forward="false" selection-start-line="1334" selection-start-column="0" selection-end-line="1334" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/courware.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="201" column="93" lean-forward="false" selection-start-line="201" selection-start-column="93" selection-end-line="201" selection-end-column="93" />
-          <folding>
-            <element signature="e#2605#3098#0" expanded="false" />
-            <element signature="e#3136#5352#0" expanded="false" />
-            <element signature="e#8757#8843#0" expanded="false" />
-            <element signature="e#8885#9545#0" expanded="false" />
-            <element signature="e#9593#11439#0" expanded="false" />
-            <element signature="e#11591#13879#0" expanded="false" />
-            <element signature="e#13927#15824#0" expanded="false" />
-            <element signature="e#15866#16550#0" expanded="false" />
-            <element signature="e#17781#18313#0" expanded="false" />
-            <element signature="e#21085#22040#0" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1504083642000" expanded="true" signature="5586:5597" ph="..." />
-            <marker date="1504083642000" expanded="true" signature="5712:5723" ph="..." />
-            <marker date="1504083642000" expanded="true" signature="5852:5863" ph="..." />
-            <marker date="1504083642000" expanded="true" signature="5988:5999" ph="..." />
-            <marker date="1504083642000" expanded="true" signature="6120:6131" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -689,11 +572,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utf8-jsp/dialogs/wordimage/tangram.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="1334" column="0" lean-forward="false" selection-start-line="1334" selection-start-column="0" selection-end-line="1334" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/JFTable.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/courware.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2190">
+          <caret line="201" column="93" lean-forward="false" selection-start-line="201" selection-start-column="93" selection-end-line="201" selection-end-column="93" />
+          <folding>
+            <element signature="e#2605#3098#0" expanded="false" />
+            <element signature="e#3136#5352#0" expanded="false" />
+            <element signature="e#8757#8843#0" expanded="false" />
+            <element signature="e#8885#9545#0" expanded="false" />
+            <element signature="e#9593#11439#0" expanded="false" />
+            <element signature="e#11591#13879#0" expanded="false" />
+            <element signature="e#13927#15824#0" expanded="false" />
+            <element signature="e#15866#16550#0" expanded="false" />
+            <element signature="e#17781#18313#0" expanded="false" />
+            <element signature="e#21085#22040#0" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1504083642000" expanded="true" signature="5586:5597" ph="..." />
+            <marker date="1504083642000" expanded="true" signature="5712:5723" ph="..." />
+            <marker date="1504083642000" expanded="true" signature="5852:5863" ph="..." />
+            <marker date="1504083642000" expanded="true" signature="5988:5999" ph="..." />
+            <marker date="1504083642000" expanded="true" signature="6120:6131" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/JFButtonList.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utf8-jsp/checkStudyTask.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="-1114">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
